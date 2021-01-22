@@ -1,0 +1,35 @@
+nav ul li {
+  text-decoration: none;
+  display: inline-block;
+  margin-right: .3em;
+}
+
+h1 {
+  color: chartreuse;
+}
+
+.alert-container {
+  width: 50vw;
+  margin: 0 auto;
+  margin-bottom: 3em;
+  color: white;
+  box-shadow: 5px 9px 9px 2px #afafaf;
+}
+
+.alert {
+  margin: .25em;
+  padding: .25em;
+  background-color: rgba(43, 43, 43, 0.687);
+}
+
+.error {
+  border: 3px solid crimson;
+  background-color: darkred
+  
+}
+
+.success {
+  border: 3px solid forestgreen;
+  background-color: rgb(20, 70, 20);
+
+}
