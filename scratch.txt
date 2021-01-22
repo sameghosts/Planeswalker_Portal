@@ -1,0 +1,69 @@
+Databases to Create
+
+planeswalker_development
+planeswalker_test
+planeswalker_production
+
+createdb planeswalker_development
+createdb planeswalker_test
+createdb planeswalker_production
+
+models 
+update user model to have card favorite integer amount
+example: sequelize model:create --name comment --attributes author:string,content:string,articleid:integer
+
+-------- Card model --------
+name - name of card - string
+manaCost - actual cost - string
+cmc - converted mana cost - integer
+colors - card colors - string
+colorIdentity - colors simplified - string
+type - card type - string
+rarity - card rarity - string
+set - set name code - string
+text- card text - string
+multiverseId - gatherer code - integer
+imageUrl - url to card image - string 
+
+sequelize model:create --name card --attributes name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
+
+------- Deck model -------
+name - name of the deck - string
+format - play format - string
+creator - deck creator - integer (foreign key userId)
+
+sequelize model:create --name deck --attributes name:string,format:string,creator:integer
+
+------ deck_comment model ------
+deckId - foreign key - integer
+userId - foregin key - integer
+comment - comment text - string
+
+sequelize model:create --name deck_comment --attributes deckId:integer,userId:integer,comment:string
+
+------ card_comment model ------
+cardId - foreign key - integer
+userId - foreign key - integer
+comment - comment text - string
+
+sequelize model:create --name card_comment --attributes cardId:integer,userId:integer,comment:string
+
+~~~~~ JOIN TABLES ~~~~~
+
+---- user_decks ----
+id - pk 
+userId - foreign key - integer
+deckId - foregin key - integer
+
+sequelize model:create --name user_deck --attributes userId:integer,deckId:integer
+
+---- deck_cards -----
+id - pk 
+deckId - foreign key - integer
+cardId - foregin key - integer
+
+sequelize model:create --name deck_card --attributes deckId:integer,cardId:integer
+
+
+winota multiverse id
+479736
