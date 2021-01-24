@@ -33,6 +33,15 @@ module.exports = (sequelize, DataTypes) => {
       }
     
     },
+    username: { 
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [1, 99],
+          msg: 'Name must be between 1 and 99 characters'
+        }
+      }
+    },
     name: { 
       type: DataTypes.STRING,
       validate: {
@@ -42,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    favorite: { 
+      type: DataTypes.INTEGER,
+      },
     password: { 
       type: DataTypes.STRING,
       validate:{

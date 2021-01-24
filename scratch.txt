@@ -12,6 +12,15 @@ models
 update user model to have card favorite integer amount
 example: sequelize model:create --name comment --attributes author:string,content:string,articleid:integer
 
+------- User model ----------
+~~~ASSOCIATIONS~~~
+models.user.hasMany(models.card_comment)
+models.user.hasMany(models.deck_comment)
+models.user.hasMany(models.deck)
+models.user.belongsToMany(models.card, {through: "user_card_fave"})
+models.user.belongsToMany(models.deck, {through: "user_deck"})
+
+
 -------- Card model --------
 name - name of card - string
 manaCost - actual cost - string
@@ -26,6 +35,12 @@ multiverseId - gatherer code - integer
 imageUrl - url to card image - string 
 
 sequelize model:create --name card --attributes name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
+~~~ASSOCIATIONS~~~
+models.card.hasMany(models.card_comment)
+models.card.belongsToMany(models.user, {through: "user_card_fave"})
+models.card.belongsToMany(models.deck, {through: "deck_card"})
+
+
 
 ------- Deck model -------
 name - name of the deck - string
@@ -33,6 +48,12 @@ format - play format - string
 creator - deck creator - integer (foreign key userId)
 
 sequelize model:create --name deck --attributes name:string,format:string,creator:integer
+~~~ASSOCIATIONS~~~
+models.deck.belongsTo(models.user)
+models.deck.hasMany(models.deck_comment)
+models.deck.belongsToMany(models.user, {through: "user_deck"})
+models.deck.belongsToMany(models.card, {through: "deck_card"})
+
 
 ------ deck_comment model ------
 deckId - foreign key - integer
@@ -40,6 +61,9 @@ userId - foregin key - integer
 comment - comment text - string
 
 sequelize model:create --name deck_comment --attributes deckId:integer,userId:integer,comment:string
+~~~ASSOCIATIONS~~~
+models.deck_comment.belongsTo(models.deck)
+models.deck_comment.belongsTo(models.user)
 
 ------ card_comment model ------
 cardId - foreign key - integer
@@ -47,22 +71,38 @@ userId - foreign key - integer
 comment - comment text - string
 
 sequelize model:create --name card_comment --attributes cardId:integer,userId:integer,comment:string
+~~~ASSOCIATIONS~~~
+models.deck_comment.belongsTo(models.card)
+models.deck_comment.belongsTo(models.user)
+
 
 ~~~~~ JOIN TABLES ~~~~~
 
----- user_decks ----
+---- user_deck ----
 id - pk 
 userId - foreign key - integer
 deckId - foregin key - integer
 
 sequelize model:create --name user_deck --attributes userId:integer,deckId:integer
+~~~ASSOCIATIONS~~~
 
----- deck_cards -----
+
+---- deck_card -----
 id - pk 
 deckId - foreign key - integer
 cardId - foregin key - integer
+amount - card amount - integer
 
 sequelize model:create --name deck_card --attributes deckId:integer,cardId:integer
+~~~ASSOCIATIONS~~~
+
+---- user_card_fave -----
+id - pk 
+userId - fk - integer
+cardId - fk - integer
+
+sequelize model:create --name user_card_fave --attributes userId:integer,cardId:integer
+~~~ASSOCIATIONS~~~
 
 
 winota multiverse id
