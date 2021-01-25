@@ -38,6 +38,7 @@ sequelize model:create --name card --attributes name:string,manaCost:string,cmc:
 ~~~ASSOCIATIONS~~~
 models.card.hasMany(models.card_comment)
 models.card.hasMany(models.dual_n_split)
+models.card.hasMany(models.flavor)
 models.card.belongsToMany(models.user, {through: "user_card_fave"})
 models.card.belongsToMany(models.deck, {through: "deck_card"})
 
@@ -84,6 +85,13 @@ sequelize model:create --name dual_n_split --attributes cardId:integer,name:stri
 ~~~ASSOCIATIONS~~~
 models.dual_n_split.belongsTo(models.card)
 
+------ flavor model ------
+cardId - fk - integer
+flavorText - flavor text if it exists - string
+
+sequelize model:create --name flavor --attributes cardId:integer,flavorText:string
+~~~ASSOCIATIONS~~~
+models.flavor.belongsTo(models.card)
 
 ~~~~~ JOIN TABLES ~~~~~
 
