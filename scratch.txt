@@ -77,8 +77,8 @@ comment - comment text - string
 
 sequelize model:create --name card_comment --attributes cardId:integer,userId:integer,comment:string
 ~~~ASSOCIATIONS~~~
-models.deck_comment.belongsTo(models.card)
-models.deck_comment.belongsTo(models.user)
+models.card_comment.belongsTo(models.card)
+models.card_comment.belongsTo(models.user)
 
 ------ dual_n_split model ---------
 cardId - foreign key - integer
