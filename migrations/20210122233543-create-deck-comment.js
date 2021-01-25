@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deckId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       comment: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

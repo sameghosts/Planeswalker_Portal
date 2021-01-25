@@ -9,9 +9,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cardId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       flavorText: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

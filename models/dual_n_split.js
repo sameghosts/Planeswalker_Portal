@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.dual_n_split.belongsTo(models.card)
+
     }
   };
   dual_n_split.init({

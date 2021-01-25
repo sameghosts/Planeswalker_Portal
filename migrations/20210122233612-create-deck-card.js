@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       deckId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       cardId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       amount: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {

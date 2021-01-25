@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
+      models.card_comment.belongsTo(models.card)
+      models.card_comment.belongsTo(models.user)
+
     }
   };
   card_comment.init({

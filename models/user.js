@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.card_comment)
+      models.user.hasMany(models.deck_comment)
+      models.user.hasMany(models.deck)
+      models.user.belongsToMany(models.card, {through: "user_card_fave"})
+      models.user.belongsToMany(models.deck, {through: "user_deck"})
+      models.user.belongsToMany(models.card, {through: "user_collection"})
+
     }
     validPassword(typedPassword) {
       let isValid = bcrypt.compareSync(typedPassword, this.password);
@@ -51,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    favorite: { 
+    fav: { 
       type: DataTypes.INTEGER,
       },
     password: { 

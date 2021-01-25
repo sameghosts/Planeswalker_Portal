@@ -9,6 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       manaCost: {
@@ -21,21 +22,26 @@ module.exports = {
         type: Sequelize.STRING
       },
       type: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       rarity: {
         type: Sequelize.STRING
       },
       set: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       text: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       multiverseId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       imageUrl: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {
