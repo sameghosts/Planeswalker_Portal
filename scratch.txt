@@ -37,6 +37,7 @@ imageUrl - url to card image - string
 sequelize model:create --name card --attributes name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
 ~~~ASSOCIATIONS~~~
 models.card.hasMany(models.card_comment)
+models.card.hasMany(models.dual_n_split)
 models.card.belongsToMany(models.user, {through: "user_card_fave"})
 models.card.belongsToMany(models.deck, {through: "deck_card"})
 
@@ -75,6 +76,14 @@ sequelize model:create --name card_comment --attributes cardId:integer,userId:in
 models.deck_comment.belongsTo(models.card)
 models.deck_comment.belongsTo(models.user)
 
+------ dual_n_split model ---------
+cardId - foreign key - integer
+'' rest of the card model as secondary data attributes
+  first card in card object array on dual creature first object 
+sequelize model:create --name dual_n_split --attributes cardId:integer,name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
+~~~ASSOCIATIONS~~~
+models.dual_n_split.belongsTo(models.card)
+
 
 ~~~~~ JOIN TABLES ~~~~~
 
@@ -105,5 +114,3 @@ sequelize model:create --name user_card_fave --attributes userId:integer,cardId:
 ~~~ASSOCIATIONS~~~
 
 
-winota multiverse id
-479736

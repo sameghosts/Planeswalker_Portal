@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class card_comment extends Model {
+  class dual_n_split extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,16 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      
     }
   };
-  card_comment.init({
+  dual_n_split.init({
     cardId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    comment: DataTypes.STRING
+    name: DataTypes.STRING,
+    manaCost: DataTypes.STRING,
+    cmc: DataTypes.STRING,
+    colorIdentity: DataTypes.STRING,
+    type: DataTypes.STRING,
+    rarity: DataTypes.STRING,
+    set: DataTypes.STRING,
+    text: DataTypes.STRING,
+    multiverseId: DataTypes.INTEGER,
+    imageUrl: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'card_comment',
+    modelName: 'dual_n_split',
   });
-  return card_comment;
+  return dual_n_split;
 };
