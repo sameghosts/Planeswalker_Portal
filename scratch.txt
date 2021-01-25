@@ -19,6 +19,7 @@ models.user.hasMany(models.deck_comment)
 models.user.hasMany(models.deck)
 models.user.belongsToMany(models.card, {through: "user_card_fave"})
 models.user.belongsToMany(models.deck, {through: "user_deck"})
+models.user.belongsToMany(models.card, {through: "user_collection"})
 
 
 -------- Card model --------
@@ -40,7 +41,9 @@ models.card.hasMany(models.card_comment)
 models.card.hasMany(models.dual_n_split)
 models.card.hasMany(models.flavor)
 models.card.belongsToMany(models.user, {through: "user_card_fave"})
+models.card.belongsToMany(models.user, {through: "user_collection"})
 models.card.belongsToMany(models.deck, {through: "deck_card"})
+
 
 
 
@@ -121,4 +124,11 @@ cardId - fk - integer
 sequelize model:create --name user_card_fave --attributes userId:integer,cardId:integer
 ~~~ASSOCIATIONS~~~
 
+------ user_collection model -------
+userId - foreign key - integer
+cardId - foreign key - integer
+amount - card collection amount - integer
+
+sequelize model:create --name user_collection --attributes userId:integer,cardId:integer,amount:integer
+~~~ASSOCIATIONS~~~
 
