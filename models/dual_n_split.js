@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     colorIdentity: DataTypes.STRING,
     type: DataTypes.STRING,
     rarity: DataTypes.STRING,
-    set: DataTypes.STRING,
+    blockset: DataTypes.STRING,
     text: DataTypes.STRING,
     multiverseId: DataTypes.INTEGER,
     imageUrl: DataTypes.STRING

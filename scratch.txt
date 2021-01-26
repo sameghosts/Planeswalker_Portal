@@ -30,12 +30,12 @@ colors - card colors - string
 colorIdentity - colors simplified - string
 type - card type - string
 rarity - card rarity - string
-set - set name code - string
+blockset - set name code - string
 text- card text - string
 multiverseId - gatherer code - integer
 imageUrl - url to card image - string 
 
-sequelize model:create --name card --attributes name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
+sequelize model:create --name card --attributes name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,blockset:string,text:string,multiverseId:integer,imageUrl:string
 ~~~ASSOCIATIONS~~~
 models.card.hasMany(models.card_comment)
 models.card.hasMany(models.dual_n_split)
@@ -84,7 +84,7 @@ models.card_comment.belongsTo(models.user)
 cardId - foreign key - integer
 '' rest of the card model as secondary data attributes
   first card in card object array on dual creature first object 
-sequelize model:create --name dual_n_split --attributes cardId:integer,name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,set:string,text:string,multiverseId:integer,imageUrl:string
+sequelize model:create --name dual_n_split --attributes cardId:integer,name:string,manaCost:string,cmc:string,colorIdentity:string,type:string,rarity:string,blockset:string,text:string,multiverseId:integer,imageUrl:string
 ~~~ASSOCIATIONS~~~
 models.dual_n_split.belongsTo(models.card)
 
@@ -103,7 +103,7 @@ id - pk
 userId - foreign key - integer
 deckId - foregin key - integer
 
-sequelize model:create --name user_deck --attributes userId:integer,deckId:integer
+sequelize model:create --name user_decks --attributes userId:integer,deckId:integer
 ~~~ASSOCIATIONS~~~
 
 
@@ -113,15 +113,15 @@ deckId - foreign key - integer
 cardId - foregin key - integer
 amount - card amount - integer
 
-sequelize model:create --name deck_card --attributes deckId:integer,cardId:integer
+sequelize model:create --name deck_cards --attributes deckId:integer,cardId:integer
 ~~~ASSOCIATIONS~~~
 
----- user_card_fave -----
+---- user_card_faves -----
 id - pk 
 userId - fk - integer
 cardId - fk - integer
 
-sequelize model:create --name user_card_fave --attributes userId:integer,cardId:integer
+sequelize model:create --name user_card_faves --attributes userId:integer,cardId:integer
 ~~~ASSOCIATIONS~~~
 
 ------ user_collection model -------

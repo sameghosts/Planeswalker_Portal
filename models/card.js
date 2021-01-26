@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       models.card.hasMany(models.card_comment)
       models.card.hasMany(models.dual_n_split)
       models.card.hasMany(models.flavor)
-      models.card.belongsToMany(models.user, {through: "user_card_fave"})
-      models.card.belongsToMany(models.user, {through: "user_collection"})
-      models.card.belongsToMany(models.deck, {through: "deck_card"})
+      models.card.belongsToMany(models.user, {through: "user_card_faves"})
+      models.card.belongsToMany(models.user, {through: "user_collections"})
+      models.card.belongsToMany(models.deck, {through: "deck_cards"})
     }
   };
   card.init({
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     colorIdentity: DataTypes.STRING,
     type: DataTypes.STRING,
     rarity: DataTypes.STRING,
-    set: DataTypes.STRING,
+    blockset: DataTypes.STRING,
     text: DataTypes.STRING,
     multiverseId: DataTypes.INTEGER,
     imageUrl: DataTypes.STRING

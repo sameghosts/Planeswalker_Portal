@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       models.user.hasMany(models.card_comment)
       models.user.hasMany(models.deck_comment)
       models.user.hasMany(models.deck)
-      models.user.belongsToMany(models.card, {through: "user_card_fave"})
-      models.user.belongsToMany(models.deck, {through: "user_deck"})
-      models.user.belongsToMany(models.card, {through: "user_collection"})
+      models.user.belongsToMany(models.card, {through: "user_card_faves"})
+      models.user.belongsToMany(models.deck, {through: "user_decks"})
+      models.user.belongsToMany(models.card, {through: "user_collections"})
 
     }
     validPassword(typedPassword) {

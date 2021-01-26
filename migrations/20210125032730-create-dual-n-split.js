@@ -32,7 +32,7 @@ module.exports = {
       rarity: {
         type: Sequelize.STRING
       },
-      set: {
+      blockset: {
         allowNull: false,
         type: Sequelize.STRING
       },
