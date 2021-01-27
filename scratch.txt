@@ -133,3 +133,5 @@ sequelize model:create --name user_collections --attributes userId:integer,cardI
 ~~~ASSOCIATIONS~~~
 
 db.deck_comment.findOrCreate()
+
+blah blah blah
