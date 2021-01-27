@@ -1,0 +1,44 @@
+
+<h1>Card Detail</h1>
+<div class="cardDetails">
+  <% data["cards"].forEach(card => { %>
+    
+    <div class="cardDetContainer">
+      <p>Name: <%= card.name %> </p>
+      <p><strong>Converted Mana Cost (CMC): </strong> <%=card.cmc %> </p>
+      <p> <strong> <%= card.manaCost %> </strong></p>
+      <p><strong>Colors: </strong> 
+        <% card.colors.forEach(colors => { %>
+          <%= colors %>
+        <% }) %>
+      </p>
+      <p><strong>Color Identity: </strong> 
+        <% card.colorIdentity.forEach(cI => { %>
+          <%= cI %>
+        <% }) %>
+      </p>
+      <p><strong>Type: </strong> <%= card.type %></p>
+      <p><strong>Text: </strong> "<%= card.text %>" </p>
+      <p><strong>Rarity: </strong> <%=card.rarity %></p>
+      <p><strong>Set: </strong> <%=card.set %></p>
+      <p><strong>Set: </strong> <%=card.setName %></p>
+      <p><strong>Multiverse Id: </strong> <%=card.multiverseid %></p>
+      <% const webId = card.multiverseid %>
+    </br>
+      <img src="<%= card.imageUrl %>" />
+  <div id="cardAction">
+    <form method="GET" action="/search/cardaction">
+      <label>Add Card To:</label>
+      <select class="selectpick" id="query-select" name="select">
+        <option value="Deck">Deck</option>
+        <option value="Collection">Collection</option>
+        <option value="Favorites">Favorites</option>
+      </select>  
+      Amount: <input type="number" name="number">
+      <input type="hidden" name="multiId" value="<%=card.multiverseid%>">
+      <input type="submit">
+    </form>
+  </div>
+  </div>
+  <% }) %>
+</div>

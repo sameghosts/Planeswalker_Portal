@@ -1,0 +1,48 @@
+<% // Render search results here %>
+  <% // good possibility this could be an interesting partial for in deck, in collection, and in cube creation/editing %>
+  <% // for each loop for each card result in the cards array %>
+<h1>Here are your search results:</h1>
+<div class="resultsContainer">
+  <!-- FIGURE OUT A WAY TO LOGIC OUT CARDS IN RESULTS ARRAY WITHOUT MULTIVERSE ID / MAIN ENTRY -->
+  <% data["cards"].forEach(card => { %>
+     
+  <% if(!card.multiverseid) { return %>
+    <% } else { %>
+      <div class="cardResContainer">
+      <a href="cards/<%= card.multiverseid %>"> <%= card.name %> </a>
+    
+      <p><strong>Converted Mana Cost (CMC): </strong> <%=card.cmc %> </p>
+      <p> <strong> <%= card.manaCost %> </strong></p>
+      <p>Set: <%= card.set %></p>
+      <p><strong>Colors: </strong> 
+        <% card.colors.forEach(colors => { %>
+          <%= colors %>
+        <% }) %>
+      </p>
+      <p><strong>Color Identity: </strong> 
+        <% card.colorIdentity.forEach(cI => { %>
+          <%= cI %>
+        <% }) %>
+      </p>
+      <p><strong>Type: </strong> <%=card.type %></p>
+      <p><strong>Multiverse Id: </strong> <%=card.multiverseid %></p>
+    </br>
+      <img src="<%= card.imageUrl %>" />
+    </div>
+    <% } %>
+  <% }) %>
+  </div>
+  <div class="cardResAction">
+    <!-- here i can put actions such as add to deck, add to collection, add to favorites -->
+    <!-- Buttons for each? one form? -->
+      <!-- what do these routes look like for creating to database and redirects -->
+        <!-- add to collection -->
+        <!-- add to favorites -->
+  </div>
+  <div class="createCardComment">
+    <!-- Here i will make for for adding a comment -->
+  </div>
+  <div class="cardCommentsRend">
+    <!-- Here I will have the card comments render for entries -->
+  </div>
+

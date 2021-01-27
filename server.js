@@ -3,6 +3,7 @@ const express = require('express');
 const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const flash = require('connect-flash');
+const axios = require('axios');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
@@ -15,7 +16,18 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+
 app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "default-src": ["'self'", "*.wizards.com"],
+      "img-src": ["'self'", "*.wizards.com"]
+
+    }
+  })
+)
+
 
 app.use(session({
   secret: process.env.SESSION_SECRET, //should be an ev variable
@@ -48,6 +60,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile');
 });
 
+app.use('/search', require('./routes/cards'))
 app.use('/auth', require('./routes/auth'));
 
 var server = app.listen(process.env.PORT || 3000, ()=> console.log(`🎧You're listening to the smooth sounds of port ${process.env.PORT || 3000}🎧`));
