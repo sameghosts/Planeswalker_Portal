@@ -69,7 +69,22 @@ router.get('/results', (req, res) =>{
           //Deck
           //Collection
           //Favorites
-      res.send(`${req.user.username} added ${req.query.number} card(s) with multiverse id ${req.query.multiId} to ${req.query.select}`)
+      switch (req.query.select){
+        case "Deck":
+          //something
+          res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck redirect`);
+          break;
+        case "Collection":
+          res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect`);
+          //something
+          break;
+        case "Favorites":
+          //something
+          res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Favorites redirect`);
+          break;
+
+      }
+      // res.send(`${req.user.username} added ${req.query.number} card(s) with multiverse id ${req.query.multiId} to ${req.query.select}`)
     });
     
     module.exports = router;
