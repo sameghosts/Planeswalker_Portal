@@ -129,6 +129,7 @@ userId - foreign key - integer
 cardId - foreign key - integer
 amount - card collection amount - integer
 
-sequelize model:create --name user_collection --attributes userId:integer,cardId:integer,amount:integer
+sequelize model:create --name user_collections --attributes userId:integer,cardId:integer,amount:integer
 ~~~ASSOCIATIONS~~~
 
+db.deck_comment.findOrCreate()
