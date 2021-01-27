@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 const mtgSDK = require('mtgsdk');
+const isLoggedIn = require('../middleware/isLoggedIn');
 
 
 //Routes
@@ -52,8 +53,6 @@ router.get('/results', (req, res) =>{
       let multiIdURL = `https://api.magicthegathering.io/v1/cards?multiverseid=${req.params.multiverseId}`
       
       axios.get(multiIdURL).then(response => {
-        //lol quickchange
-        // console.log(response);
         // console.log(response.data);
         // res.send(response.data);
         res.render('./search/details', {data: response.data})
@@ -63,9 +62,14 @@ router.get('/results', (req, res) =>{
     })
     
     //routes for adds from card details page
-    router.get('/cardaction', (req, res) =>{
+    router.get('/cardaction', isLoggedIn, (req, res) =>{
       console.log(req.query.multiId)
-      res.send(`add ${req.query.number} card(s) with multiverse id ${req.query.multiId} to ${req.query.select}`)
+      //conditional statements for each of the possible posts 
+        // if (req.query.select = "...")
+          //Deck
+          //Collection
+          //Favorites
+      res.send(`${req.user.username} added ${req.query.number} card(s) with multiverse id ${req.query.multiId} to ${req.query.select}`)
     });
     
     module.exports = router;
