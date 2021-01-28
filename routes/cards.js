@@ -68,23 +68,59 @@ router.get('/results', (req, res) =>{
             break;
           case "Collection":
             //data check
-            console.log(`for console log to check data corret
-            name: ${result.data.cards[0].name}
-            manaCost: ${result.data.cards[0].manaCost}
-            cmc : ${result.data.cards[0].cmc}
-            colorIdentity: ${result.data.cards[0].colorIdentity}
-            rarity: ${result.data.cards[0].rarity}
-            blockset: ${result.data.cards[0].set}
-            blocksetname: ${result.data.cards[0].setName}
-            multiverseId: ${result.data.cards[0].multiverseid}
-            imageUrl: ${result.data.cards[0].imageUrl}`);
+              // console.log(`for console log to check data correct
+              // name: ${result.data.cards[0].name}
+              // manaCost: ${result.data.cards[0].manaCost}
+              // cmc : ${result.data.cards[0].cmc}
+              // colorIdentity: ${result.data.cards[0].colorIdentity}
+              // rarity: ${result.data.cards[0].rarity}
+              // blockset: ${result.data.cards[0].set}
+              // blocksetname: ${result.data.cards[0].setName}
+              // multiverseId: ${result.data.cards[0].multiverseid}
+              // imageUrl: ${result.data.cards[0].imageUrl}`);
+
+            //Database CRUD - CREATE collection
+            db.card.findOrCreate({
+              where: {
+                multiverseId: result.data.cards[0].multiverseid
+              },
+              defaults: {
+                name: result.data.cards[0].name,
+                manaCost: result.data.cards[0].manaCost,
+                cmc : result.data.cards[0].cmc,
+                colorIdentity: result.data.cards[0].colorIdentity.forEach(item => item),
+                rarity: result.data.cards[0].rarity,
+                blockset: result.data.cards[0].set,
+                blocksetname: result.data.cards[0].setName,
+                imageUrl: result.data.cards[0].imageUrl
+              }
+            }).then(([card, created]) => {
+              // right now for crud test using value, but later must use req.user.id
+              db.user.findOrCreate({
+                where: {
+                  id: req.user.id 
+                }
+              }).then(([user, created]) => {
+                user.addCard(card).then(relation => {
+                  console.log(`${card.name} added to ${user.username} collection`);
+                  console.log(relation);
+                  // use req dot query value from add form
+                  let updateAmount = { amount: req.query.number };
+                  db.user_collections.update(updateAmount, {
+                    where: {
+                      userId: user.id,
+                      cardId: card.id
+                    }
+                  }).then((result) =>{
+                    console.log(result)
+                  })
+                })
+              })
+            });
             //route check stub
-            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect called ${result.data.cards[0].name}`);
+            res.send(`${req.user.username} adding ${req.query.number} card(s) with multiverse id ${req.query.multiId} called ${result.data.cards[0].name} to Collection this will be a redirect`);
+            res.redirect(`user/collection/${req.user.id}`);
             //something
-            break;
-          case "Favorites":
-            //something
-            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Favorites redirect`);
             break;
   
         }

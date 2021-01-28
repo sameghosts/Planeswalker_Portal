@@ -1,5 +1,6 @@
 const axios = require('axios');
 const db = require('./models');
+const user_collections = require('./models/user_collections');
 /*
 Ok figured something out. the way the databases are currently managed will not work in sql achitecture. Must burn it down and remake the models so their are only one relationship between two tables. 
 
@@ -38,13 +39,20 @@ axios.get(mtgURLdetails).then(result =>{
       user.addCard(card).then(relation => {
         console.log(`${card.name} added to ${user.username} favorites`);
         console.log(relation);
+        // use req dot query value from add form
+        let updateAmount = { amount: 3 };
+        db.user_collections.update(updateAmount, {
+          where: {
+            userId: user.id,
+            cardId: card.id
+          }
+        }).then((result) =>{
+          console.log(result)
+        })
       })
     })
   })
 }); 
-
-
-
 
 // ------ Collection Model Crud Logic -----
 
