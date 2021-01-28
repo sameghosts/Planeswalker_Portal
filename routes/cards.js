@@ -78,8 +78,19 @@ router.get('/results', (req, res) =>{
             res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck redirect`);
             break;
           case "Collection":
-            console.log(result.data);
-            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect called ${result.data.name}`);
+            //data check
+            console.log(`for console log to check data corret
+            name: ${result.data.cards[0].name}
+            manaCost: ${result.data.cards[0].manaCost}
+            cmc : ${result.data.cards[0].cmc}
+            colorIdentity: ${result.data.cards[0].colorIdentity}
+            rarity: ${result.data.cards[0].rarity}
+            blockset: ${result.data.cards[0].set}
+            blocksetname: ${result.data.cards[0].setName}
+            multiverseId: ${result.data.cards[0].multiverseid}
+            imageUrl: ${result.data.cards[0].imageUrl}`);
+            //route check stub
+            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect called ${result.data.cards[0].name}`);
             //something
             break;
           case "Favorites":

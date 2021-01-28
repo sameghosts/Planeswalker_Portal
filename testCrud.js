@@ -40,26 +40,28 @@ const db = require('./models');
 //         console.log('🐻 Bad news bears, there be an error');
 //         console.log(err);
 //     });
+
 db.pet.findOrCreate({
-where: {
-name: 'Silly May',
-species: 'Mini Aussie'
-},
-defaults: {
-userId: 1
-}
-}).then(([pet, created]) => {
-// Get a reference to a toy
-db.toy.findOrCreate({
-where: {
-    type: 'stinky bear',
-    color: 'brown'
-}
-}).then(([toy, created]) => {
-// use the "addModel" method to attach one model to another model.
-pet.addToy(toy).then(relation => {
-    console.log(`🦊 ${toy.type} added to ${pet.name}`)
-    console.log(relation)
-})
-})
-})
+        where: {
+            name: 'Silly May',
+            species: 'Mini Aussie'
+        },
+        defaults: {
+            userId: 1
+        }
+    }).then(([pet, created]) => {
+        // Get a reference to a toy
+        db.toy.findOrCreate({
+            where: {
+                type: 'stinky bear',
+                color: 'brown'
+            }
+        }).then(([toy, created]) => {
+            // use the "addModel" method to attach one model to another model.
+            pet.addToy(toy).then(relation => {
+                console.log(`🦊 ${toy.type} added to ${pet.name}`)
+                console.log(relation)
+            })
+        })
+    })
+
