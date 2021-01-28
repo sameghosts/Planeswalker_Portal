@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = express.Router();
 const mtgSDK = require('mtgsdk');
 const isLoggedIn = require('../middleware/isLoggedIn');
-
+const db = require('../models');
 
 //Routes
 // router.get('/search', (req, res) =>{
@@ -118,8 +118,8 @@ router.get('/results', (req, res) =>{
               })
             });
             //route check stub
-            res.send(`${req.user.username} adding ${req.query.number} card(s) with multiverse id ${req.query.multiId} called ${result.data.cards[0].name} to Collection this will be a redirect`);
-            res.redirect(`user/collection/${req.user.id}`);
+            // res.send(`${req.user.username} adding ${req.query.number} card(s) with multiverse id ${req.query.multiId} called ${result.data.cards[0].name} to Collection this will be a redirect`);
+            res.redirect(`../user/collection`);
             //something
             break;
   

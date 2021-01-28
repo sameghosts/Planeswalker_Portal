@@ -5,12 +5,13 @@ const mtgSDK = require('mtgsdk');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const db = require('../models');
 
-router.get('user/collection/:id', (req, res) => {
+router.get('/collection', isLoggedIn, (req, res) => {
   db.user.findOne({
-    where: { id: req.params.id},
-    include: [db.card, db.user_collections]
+    where: { id: req.user.id},
+    include: [db.card]
   }).then((collection) => {
     console.log(collection);
-    res.render('user/collection')
+    res.render('./user/collection')
   })
 })
+module.exports = router;
