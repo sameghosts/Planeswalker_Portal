@@ -24,19 +24,8 @@ router.get('/results', (req, res) =>{
   
   
   axios.get(mtgURL).then(response => {
-    // axios.get(mtgURLmultiverseid).then(response => {
-      //lol quickchange
-      let valueSel;
-      // let getOption =  () => {
-        //   // selectElement= document.querySelector('#selectpick');
-        //   valueSel = selectElement.options[selectElement.selectedIdex].value
-        // };
-        // getOption();
-        // console.log(req.body.select);
         console.log(req.query);
         console.log(req.query.value);
-        // console.log(response);
-        // console.log(response.data);
         //results view
         // res.send(response.data);
         // console.log(response.data);
