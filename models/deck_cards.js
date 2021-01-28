@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   deck_cards.init({
     deckId: DataTypes.INTEGER,
-    cardId: DataTypes.INTEGER
+    cardId: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'deck_cards',

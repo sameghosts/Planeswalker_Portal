@@ -10,7 +10,7 @@ As a stretch goal later i can take the logic ive defined here and store them as 
 // ------ Collection Model Crud Logic -----
       // CREATE
 //call multiId from req.query.multiId
-/* 
+
 let multiId = 479736
 let mtgURLdetails = `https://api.magicthegathering.io/v1/cards?multiverseid=${multiId}`;
 axios.get(mtgURLdetails).then(result =>{
@@ -41,7 +41,7 @@ axios.get(mtgURLdetails).then(result =>{
       })
     })
   })
-}); */
+}); 
 
 
 
