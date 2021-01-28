@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      author: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       creator: {
         allowNull: false,
         type: Sequelize.INTEGER

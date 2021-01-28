@@ -9,17 +9,16 @@ createdb planeswalker_test
 createdb planeswalker_production
 
 models 
-update user model to have card favorite integer amount
-example: sequelize model:create --name comment --attributes author:string,content:string,articleid:integer
+Post the database restructuring. 
+  - Burn Down card Faves so only one MnM relationship between user and cards
+  - Burn down relationship between user and decks as author and have a string value for Author name, and a accepted nul integer creator that steals req.user.id when CRUD create deck
 
 ------- User model ----------
 ~~~ASSOCIATIONS~~~
 models.user.hasMany(models.card_comment)
 models.user.hasMany(models.deck_comment)
-models.user.hasMany(models.deck)
-models.user.belongsToMany(models.card, {through: "user_card_fave"})
-models.user.belongsToMany(models.deck, {through: "user_deck"})
-models.user.belongsToMany(models.card, {through: "user_collection"})
+models.user.belongsToMany(models.deck, {through: "user_decks"})
+models.user.belongsToMany(models.card, {through: "user_collections"})
 
 
 -------- Card model --------
@@ -40,9 +39,8 @@ sequelize model:create --name card --attributes name:string,manaCost:string,cmc:
 models.card.hasMany(models.card_comment)
 models.card.hasMany(models.dual_n_split)
 models.card.hasMany(models.flavor)
-models.card.belongsToMany(models.user, {through: "user_card_fave"})
-models.card.belongsToMany(models.user, {through: "user_collection"})
-models.card.belongsToMany(models.deck, {through: "deck_card"})
+models.card.belongsToMany(models.user, {through: "user_collections"})
+models.card.belongsToMany(models.deck, {through: "deck_cards"})
 
 
 
@@ -52,12 +50,11 @@ name - name of the deck - string
 format - play format - string
 creator - deck creator - integer (foreign key userId)
 
-sequelize model:create --name deck --attributes name:string,format:string,creator:integer
+sequelize model:create --name deck --attributes name:string,format:string,creator:integer,author:string
 ~~~ASSOCIATIONS~~~
-models.deck.belongsTo(models.user)
 models.deck.hasMany(models.deck_comment)
-models.deck.belongsToMany(models.user, {through: "user_deck"})
-models.deck.belongsToMany(models.card, {through: "deck_card"})
+models.deck.belongsToMany(models.user, {through: "user_decks"})
+models.deck.belongsToMany(models.card, {through: "deck_cards"})
 
 
 ------ deck_comment model ------
@@ -98,7 +95,7 @@ models.flavor.belongsTo(models.card)
 
 ~~~~~ JOIN TABLES ~~~~~
 
----- user_deck ----
+---- user_decks ----
 id - pk 
 userId - foreign key - integer
 deckId - foregin key - integer
@@ -107,7 +104,7 @@ sequelize model:create --name user_decks --attributes userId:integer,deckId:inte
 ~~~ASSOCIATIONS~~~
 
 
----- deck_card -----
+---- deck_cards -----
 id - pk 
 deckId - foreign key - integer
 cardId - foregin key - integer
@@ -117,14 +114,10 @@ sequelize model:create --name deck_cards --attributes deckId:integer,cardId:inte
 ~~~ASSOCIATIONS~~~
 
 ---- user_card_faves -----
-id - pk 
-userId - fk - integer
-cardId - fk - integer
+~~~~~ DELETED ~~~~~~~~~
 
-sequelize model:create --name user_card_faves --attributes userId:integer,cardId:integer
-~~~ASSOCIATIONS~~~
 
------- user_collection model -------
+------ user_collections model -------
 userId - foreign key - integer
 cardId - foreign key - integer
 amount - card collection amount - integer

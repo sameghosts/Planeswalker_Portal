@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.user.hasMany(models.card_comment)
       models.user.hasMany(models.deck_comment)
-      models.user.hasMany(models.deck)
-      models.user.belongsToMany(models.card, {through: "user_card_faves"})
       models.user.belongsToMany(models.deck, {through: "user_decks"})
       models.user.belongsToMany(models.card, {through: "user_collections"})
 

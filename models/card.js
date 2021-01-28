@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       models.card.hasMany(models.card_comment)
       models.card.hasMany(models.dual_n_split)
       models.card.hasMany(models.flavor)
-      models.card.belongsToMany(models.user, {through: "user_card_faves"})
       models.card.belongsToMany(models.user, {through: "user_collections"})
       models.card.belongsToMany(models.deck, {through: "deck_cards"})
     }
