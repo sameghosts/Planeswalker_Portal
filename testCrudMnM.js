@@ -1,6 +1,16 @@
 const axios = require('axios');
 const db = require('./models');
+/*
+Ok figured something out. the way the databases are currently managed will not work in sql achitecture. Must burn it down and remake the models so their are only one relationship between two tables. 
 
+As a stretch goal later i can take the logic ive defined here and store them as nosql databases or a second database. 
+*/
+
+
+// ------ Collection Model Crud Logic -----
+      // CREATE
+//call multiId from req.query.multiId
+/* 
 let multiId = 479736
 let mtgURLdetails = `https://api.magicthegathering.io/v1/cards?multiverseid=${multiId}`;
 axios.get(mtgURLdetails).then(result =>{
@@ -22,7 +32,7 @@ axios.get(mtgURLdetails).then(result =>{
     // right now for crud test using value, but later must use req.user.id
     db.user.findOrCreate({
       where: {
-        id: 1
+        id: 1 
       }
     }).then(([user, created]) => {
       user.addCard(card).then(relation => {
@@ -31,4 +41,12 @@ axios.get(mtgURLdetails).then(result =>{
       })
     })
   })
-});
+}); */
+
+
+
+
+// ------ Collection Model Crud Logic -----
+
+// ------ Collection Model Crud Logic -----
+// ------ Collection Model Crud Logic -----
