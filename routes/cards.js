@@ -78,7 +78,8 @@ router.get('/results', (req, res) =>{
             res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck redirect`);
             break;
           case "Collection":
-            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect`);
+            console.log(result.data);
+            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to Collection and redirect called ${result.data.name}`);
             //something
             break;
           case "Favorites":
