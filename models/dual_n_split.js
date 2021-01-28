@@ -18,13 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   dual_n_split.init({
     cardId: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    manaCost: DataTypes.STRING,
-    cmc: DataTypes.STRING,
-    colorIdentity: DataTypes.STRING,
-    type: DataTypes.STRING,
-    rarity: DataTypes.STRING,
-    blockset: DataTypes.STRING,
-    text: DataTypes.STRING,
     multiverseId: DataTypes.INTEGER,
     imageUrl: DataTypes.STRING
   }, {

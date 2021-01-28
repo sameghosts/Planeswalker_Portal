@@ -1,0 +1,17 @@
+search query types
+  //multiversid
+  //name
+  //color
+  old urls before req.query.select
+  let mtgURLname = `https://api.magicthegathering.io/v1/cards?${req.query.select}=${req.query.value}&page=1&pageSize=20`;
+  let mtgURLmultiverseid = `https://api.magicthegathering.io/v1/cards?multiverseid=${req.query.value}&page=1&pageSize=20`;
+  let mtgURLcolor = `https://api.magicthegathering.io/v1/cards?color=${req.query.value}&page=1&pageSize=20`;
+  let mtgURLtype = `https://api.magicthegathering.io/v1/cards?type=${req.query.value}&set=IKO&page=1&pageSize=20`;
+let mtgURLset = `https://api.magicthegathering.io/v1/cards?set=${req.query.value}&page=1&pageSize=20`;
+
+innerText - value
+Name - "name"
+Color - "color"
+Multiverse Id - "multiverseid"
+Card Type - "type"
+Set - "set"

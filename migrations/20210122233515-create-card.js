@@ -21,10 +21,6 @@ module.exports = {
       colorIdentity: {
         type: Sequelize.STRING
       },
-      type: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       rarity: {
         type: Sequelize.STRING
       },
@@ -32,7 +28,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      text: {
+      blocksetname: {
         allowNull: false,
         type: Sequelize.STRING
       },

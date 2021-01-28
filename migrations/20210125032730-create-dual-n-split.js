@@ -16,30 +16,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      manaCost: {
-        type: Sequelize.STRING
-      },
-      cmc: {
-        type: Sequelize.STRING
-      },
-      colorIdentity: {
-        type: Sequelize.STRING
-      },
-      type: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      rarity: {
-        type: Sequelize.STRING
-      },
-      blockset: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      text: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       multiverseId: {
         allowNull: false,
         type: Sequelize.INTEGER
