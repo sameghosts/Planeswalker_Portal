@@ -4,7 +4,7 @@
   <% collection.cards.forEach( (card, index) => { %>
     <% const cardAmount = amount[index].dataValues.amount %>
     <div class="cardhover">
-      <a  image="<%= card.imgUrl%>" rel="popover" href="./cards/<%= card.multiverseid %>">
+      <a  href="../search/cards/<%= card.multiverseId %>">
         <%=card.name %> 
 
       </a>
