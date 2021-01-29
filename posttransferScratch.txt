@@ -15,3 +15,7 @@ Color - "color"
 Multiverse Id - "multiverseid"
 Card Type - "type"
 Set - "set"
+
+<% amount.forEach( (amounts, index) =>{ %>
+        <%= (amounts.dataValues.cardId = card.id) ? `${amounts.dataValues.amount.index}` : '' %>
+        <% }) %>

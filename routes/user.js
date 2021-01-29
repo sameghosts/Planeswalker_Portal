@@ -10,8 +10,15 @@ router.get('/collection', isLoggedIn, (req, res) => {
     where: { id: req.user.id},
     include: [db.card]
   }).then((collection) => {
-    console.log(collection);
-    res.render('./user/collection')
+    db.user_collections.findAll({
+      where: {
+        userId: req.user.id
+      }
+    }).then((amount) =>{ 
+      console.log(amount);
+      res.render('./user/collection', {collection: collection, amount: amount})
+      
+    })
   })
 })
 module.exports = router;

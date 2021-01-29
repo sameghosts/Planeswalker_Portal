@@ -33,3 +33,10 @@ h1 {
   background-color: rgb(20, 70, 20);
 
 }
+.hiddenimage {
+  width: 100%;
+  display: none;
+}
+.cardhover:hover .hiddenimage{
+  display: block;
+}
