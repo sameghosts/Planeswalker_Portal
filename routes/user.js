@@ -40,4 +40,6 @@ router.get('/collection/delete/:id', isLoggedIn, (req,res ) =>{
   })
   // res.send(`Deleting card ${req.params.id} for user ${req.user.id}`)
 })
+
+// this is a functional MVP clone from before branch merge. Much more could be done but this at least satisfies project requirements. No styling yet
 module.exports = router;
