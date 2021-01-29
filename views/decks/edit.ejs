@@ -23,7 +23,7 @@
     <% deck.cards.forEach( (card, index) => { %>
       <% const cardAmount = amount[index].dataValues.amount %>
       <div class="cardhover">
-        <a class="cardName"  href="../search/cards/<%= card.multiverseId %>">
+        <a class="cardName"  href="/search/cards/<%= card.multiverseId %>">
           <%=card.name %> 
   
         </a>
