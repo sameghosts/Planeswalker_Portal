@@ -40,4 +40,6 @@ router.get('/collection/delete/:id', isLoggedIn, (req,res ) =>{
   })
   // res.send(`Deleting card ${req.params.id} for user ${req.user.id}`)
 })
+
+//Post merge master with databaseRewrite
 module.exports = router;
