@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Authentication</title>
+    <title>Planeswalker Portal</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <header>
       <nav>
         <ul>
+          <li><a href="/">Home / Search</a></li>
           <% if(currentUser) { %>
             <li><a href="/auth/logout">Logout</a></li>
             <li><a href="/profile">Profile</a></li>
@@ -21,7 +22,7 @@
         </ul>
       </nav>
     </header>
-    <h1>Authentication</h1>
+    <h1>Welcome to the Planeswalker Portal</h1>
     <%= alerts ? alerts.length : 'no alerts' %>
     <%- include('./partials/alerts.ejs') %>
     <%- body %>
