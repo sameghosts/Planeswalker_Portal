@@ -19,32 +19,49 @@ router.get('/create/:id', isLoggedIn, (req, res) =>{
 
 // Create Deck Route (from details)
 router.get('/createFromCard/new', isLoggedIn, (req, res) => {
-  db.card.findOne({
-    where: {
-      multiverseId: req.query.cardMultiId
-    }
-  }).then((card) => {
-    db.deck.findOrCreate({
+  let createNewUrl = `https://api.magicthegathering.io/v1/cards?multiverseid=${req.query.cardMultiId}`;
+  axios.get(createNewUrl).then(result =>{
+  // db.card.findOrCreate({
+  //   where: {
+  //     multiverseId: req.query.cardMultiId
+  //   }
+    db.card.findOrCreate({
       where: {
-        name: req.query.deckName,
-        creator: req.user.id
+        multiverseId: result.data.cards[0].multiverseid
       },
       defaults: {
-        format: req.query.deckFormat,
-        description: req.query.deckDescription,
-        author: req.query.deckAuthor
+        name: result.data.cards[0].name,
+        manaCost: result.data.cards[0].manaCost,
+        cmc : result.data.cards[0].cmc,
+        colorIdentity: result.data.cards[0].colorIdentity.forEach(item => item),
+        rarity: result.data.cards[0].rarity,
+        blockset: result.data.cards[0].set,
+        blocksetname: result.data.cards[0].setName,
+        imageUrl: result.data.cards[0].imageUrl
       }
-    }).then(([deck, created]) => {
-      card.addDeck(deck).then(relation => {
-        let updateAmount = { amount: req.query.cardAmount};
-        db.deck_cards.update(updateAmount, {
-          where:{
-            deckId: deck.id,
-            cardId: card.id
-          } 
-        }).then((result) => {
-          // res.send('deck edit params id');
-          res.redirect(`/deck/edit/${deck.id}`)
+    }).then(([card, created]) => {
+      db.deck.findOrCreate({
+        where: {
+          name: req.query.deckName,
+          creator: req.user.id
+        },
+        defaults: {
+          format: req.query.deckFormat,
+          description: req.query.deckDescription,
+          author: req.query.deckAuthor
+        }
+      }).then(([deck, created]) => {
+        card.addDeck(deck).then(relation => {
+          let updateAmount = { amount: req.query.cardAmount};
+          db.deck_cards.update(updateAmount, {
+            where:{
+              deckId: deck.id,
+              cardId: card.id
+            } 
+          }).then((result) => {
+            // res.send('deck edit params id');
+            res.redirect(`/deck/edit/${deck.id}`)
+          })
         })
       })
     })
@@ -71,7 +88,66 @@ router.get('/edit/:id', isLoggedIn, (req, res) =>{
 
 router.get('/addCard/:id', isLoggedIn, (req, res) =>{
   
-})
+  let createNewUrl = `https://api.magicthegathering.io/v1/cards?multiverseid=${req.params.id}`;
+  axios.get(createNewUrl).then(result =>{
+  // db.card.findOrCreate({
+  //   where: {
+  //     multiverseId: req.query.cardMultiId
+  //   }
+    db.card.findOrCreate({
+      where: {
+        multiverseId: result.data.cards[0].multiverseid
+      },
+      defaults: {
+        name: result.data.cards[0].name,
+        manaCost: result.data.cards[0].manaCost,
+        cmc : result.data.cards[0].cmc,
+        colorIdentity: result.data.cards[0].colorIdentity.forEach(item => item),
+        rarity: result.data.cards[0].rarity,
+        blockset: result.data.cards[0].set,
+        blocksetname: result.data.cards[0].setName,
+        imageUrl: result.data.cards[0].imageUrl
+      }
+    }).then(([card, created]) =>{
+      db.deck.findAll({
+        where: {
+          creator: req.user.id,
+        }
+      }).then((decks) =>{
+
+        res.render('./decks/editAdd', {card: card, decks: decks})
+      })
+    })
+  })
+});
+
+// Add existing card Database Crud and redirect
+router.get('/cardAdding', isLoggedIn, (req, res) => {
+  db.deck.findOne({
+    where: {
+      id: req.query.select
+    }
+  }).then((deck) =>{
+    db.card.findOne({
+      where: {
+        id: req.query.cardId
+      }
+    }).then((card) =>{
+      card.addDeck(deck).then(relation => {
+        let updateAmount = { amount: req.query.number };
+        db.deck_cards.update(updateAmount, {
+          where: {
+            deckId: deck.id,
+            cardId: card.id
+          }
+        }).then((results) => {
+          console.log(results);
+          res.redirect(`./edit/${deck.id}`);
+        }) 
+      })
+    })
+  })
+});
 
 router.get('/edit/delete/:id', isLoggedIn, (req, res) => {
   let query = `${req.params.id}` 

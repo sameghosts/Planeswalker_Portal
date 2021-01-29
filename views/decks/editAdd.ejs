@@ -1,0 +1,14 @@
+<h2> Add card <%= card.name %> To An Existing Deck Below! </h2>
+<div id="addExistingCard">
+  <form method="GET" action="/deck/cardAdding">
+    <input type="hidden" name="cardId" value="<%= card.id %>">
+    <select class="selectpick" id="query-select" name="select">
+        <% decks.forEach(deck => { %>
+        <option value="<%= deck.id %>"> <%= deck.name %> </option>
+        <% }) %>
+      </select>
+      Amount: <input type="number" name="number">
+      <input type="submit">
+  </form>
+
+</div> 
