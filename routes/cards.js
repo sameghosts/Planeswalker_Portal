@@ -64,7 +64,27 @@ router.get('/results', (req, res) =>{
         switch (req.query.select){
           case "Deck":
             //something
-            res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck redirect`);
+
+            //Database CRUD - card to redirect to deck create
+            db.card.findOrCreate({
+              where: {
+                multiverseId: result.data.cards[0].multiverseid
+              },
+              defaults: {
+                name: result.data.cards[0].name,
+                manaCost: result.data.cards[0].manaCost,
+                cmc : result.data.cards[0].cmc,
+                colorIdentity: result.data.cards[0].colorIdentity.forEach(item => item),
+                rarity: result.data.cards[0].rarity,
+                blockset: result.data.cards[0].set,
+                blocksetname: result.data.cards[0].setName,
+                imageUrl: result.data.cards[0].imageUrl
+              }
+            }).then(([card, created]) => {
+              console.log(`👻 ${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck create frorm redirect`);
+              res.redirect(`../deck/create/param1=${card.multiverseId}&param2=${req.query.number}`);
+            // res.send(`${req.user.username} adding card with multiverse id ${req.query.multiId} to new deck redirect`);
+            });
             break;
           case "Collection":
             //data check
