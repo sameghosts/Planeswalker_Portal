@@ -1,6 +1,6 @@
 <h2>Homepage</h2>
 
-<%= currentUser ? Welcome currentUser.name : 'There is no user'%>
+<%= currentUser ? `Welcome ${currentUser.name}` : 'There is no user'%>
 <h2>Magic Card Search</h2>
 <p>Search your stuff below...</p>
 <form method="GET" action="/search/results">
