@@ -21,4 +21,23 @@ router.get('/collection', isLoggedIn, (req, res) => {
     })
   })
 })
+
+router.get('/collection/delete/:id', isLoggedIn, (req,res ) =>{
+  db.card.findOne({
+    where: {
+      multiverseId: req.params.id
+    }
+  }).then((card) => {
+    db.user_collections.destroy({
+      where: {
+        userId: req.user.id,
+        cardId: card.id
+      }
+    }).then(rowDeleted => {
+      console.log(`Deleting card with multiId ${req.params.id}, named ${card.name} for user ${req.user.id} ${req.user.username}`);
+      res.redirect('/user/collection');
+    })
+  })
+  // res.send(`Deleting card ${req.params.id} for user ${req.user.id}`)
+})
 module.exports = router;

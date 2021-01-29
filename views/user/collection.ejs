@@ -1,17 +1,18 @@
 <h1> user collection</h1>
-<div id="card">
+<div id="cardcollection">
 
   <% collection.cards.forEach( (card, index) => { %>
     <% const cardAmount = amount[index].dataValues.amount %>
     <div class="cardhover">
-      <a  href="../search/cards/<%= card.multiverseId %>">
+      <a class="cardName"  href="../search/cards/<%= card.multiverseId %>">
         <%=card.name %> 
 
       </a>
         <%= (amount[index].dataValues.cardId = card.id) ? ` X ${cardAmount}` : '' %>
-        <p>
-        <%= card.imgUrl %> 
-      </p>
+        <a class="cardColDelete" href="./collection/delete/<%= card.multiverseId %>">
+        Delete
+        </a>
+        <img src="<%= card.imageUrl %>" class="hiddenimage">
     </div>
     <% }) %>
       

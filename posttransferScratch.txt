@@ -19,3 +19,5 @@ Set - "set"
 <% amount.forEach( (amounts, index) =>{ %>
         <%= (amounts.dataValues.cardId = card.id) ? `${amounts.dataValues.amount.index}` : '' %>
         <% }) %>
+
+        <a data-card-id="Edgewall Innkeeper [ELD]" data-full-image="https://cdn1.mtggoldfish.com/images/gf/Edgewall%2BInnkeeper%2B%255BELD%255D.jpg" rel="popover" href="/price/Throne+of+Eldraine/Edgewall+Innkeeper#paper" data-original-title="" title="">Edgewall Innkeeper</a>
