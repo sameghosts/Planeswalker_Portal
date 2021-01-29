@@ -1,4 +1,4 @@
-<h2> Here is where the route goes for deck create form </h2>
+<h2> Create your new deck below:</h2>
 
 <p>
 stuff 
@@ -7,3 +7,17 @@ will add these values into the form oh pls work
 <%= parsedQuery.param2 %>
 
 </p>
+<div class="newDeckForm">
+  <form method="GET" action="/deck/createFromCard/new" id="deckCreate">
+    Deck Name: <input type="text" name="deckName">
+    Deck Format: <input type="text" name="deckFormat">
+    Deck Author: <input type="text" name="deckAuthor">
+    <input type="hidden" name="deckCreator" value="<%=parsedQuery.param1%>">
+    <input type="hidden" name="cardMultiId" value="<%=parsedQuery.param1%>">
+    <input type="hidden" name="cardAmount" value="<%=parsedQuery.param2%>">
+    <input type="submit">
+  </form>
+</br>
+</br>
+<textarea name="deckDescription" rows="6" cols="75" form="deckCreate">Enter your deck description here....</textarea>
+</div>
