@@ -60,7 +60,7 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile');
 });
 
-app.use('/search', require('./routes/cards'))
+app.use('/search', require('./routes/cards'));
 app.use('/auth', require('./routes/auth'));
 app.use('/user', require('./routes/user'));
 app.use('/deck', require('./routes/decks'));
