@@ -43,8 +43,8 @@ router.get('/createFromCard/new', isLoggedIn, (req, res) => {
             cardId: card.id
           } 
         }).then((result) => {
-          res.send('deck edit params id');
-          // res.redirect(`/deck/edit/${deck.id})
+          // res.send('deck edit params id');
+          res.redirect(`/deck/edit/${deck.id}`)
         })
       })
     })
@@ -52,6 +52,45 @@ router.get('/createFromCard/new', isLoggedIn, (req, res) => {
 });
 
 router.get('/edit/:id', isLoggedIn, (req, res) =>{
-  db.
+  db.deck.findOne({
+    where: {
+      id: req.params.id
+    }, 
+    include: [db.card]
+  }).then((deckEdit) => {
+    db.deck_cards.findAll({
+      where: {
+        deckId: deckEdit.id
+      }
+    }).then((amount) => {
+      console.log(deckEdit.cards);
+      res.render('./decks/edit', {deck: deckEdit, amount: amount})
+    })
+  })
+})
+
+router.get('/addCard/:id', isLoggedIn, (req, res) =>{
+  
+})
+
+router.get('/edit/delete/:id', isLoggedIn, (req, res) => {
+  let query = `${req.params.id}` 
+  let parsedQuery = querystring.parse(query);
+  db.card.findOne({
+    where: {
+      multiverseId: parsedQuery.paramDeckCard
+    },
+    include: [db.deck]
+  }).then((card) =>{
+    db.deck_cards.destroy({
+      where: {
+        deckId: parsedQuery.paramDeckId,
+        cardId: card.id
+      }
+    }).then(rowDeleted => {
+      console.log(`Deleting card with multiId ${card.multiverseId}, named ${card.name} for user ${req.user.id} ${req.user.username} from Deck named ${card.decks.name}`);
+      res.redirect(`/deck/edit/${parsedQuery.paramDeckId}`);
+    })
+  })
 })
 module.exports = router;
