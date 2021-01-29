@@ -2,14 +2,16 @@
 <div id="card">
 
   <% collection.cards.forEach( (card, index) => { %>
+    <% const cardAmount = amount[index].dataValues.amount %>
     <div class="cardhover">
-      <p> 
-        <% const cardAmount = amount[index].dataValues.amount %>
+      <a  image="<%= card.imgUrl%>" rel="popover" href="./cards/<%= card.multiverseid %>">
         <%=card.name %> 
+
+      </a>
         <%= (amount[index].dataValues.cardId = card.id) ? ` X ${cardAmount}` : '' %>
-        
+        <p>
+        <%= card.imgUrl %> 
       </p>
-      <img class="hiddenimage" src="<%= card.imgUrl %>" >
     </div>
     <% }) %>
       
