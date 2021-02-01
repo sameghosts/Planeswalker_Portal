@@ -4,15 +4,16 @@
   <% collection.cards.forEach( (card, index) => { %>
     <% const cardAmount = amount[index].dataValues.amount %>
     <div class="cardhover">
-      <a class="cardName"  href="../search/cards/<%= card.multiverseId %>">
-        <%=card.name %> 
-
-      </a>
+      <div class="tooltip-hover">
+        <a class="cardName"  href="../search/cards/<%= card.multiverseId %>">
+          <%=card.name %>   
+        </a>
+        <img src="<%= card.imageUrl %>" class="hiddenimage">
+      </div>
         <%= (amount[index].dataValues.cardId = card.id) ? ` X ${cardAmount}` : '' %>
         <a class="cardColDelete" href="./collection/delete/<%= card.multiverseId %>">
         Delete
         </a>
-        <img src="<%= card.imageUrl %>" class="hiddenimage">
     </div>
     <% }) %>
       

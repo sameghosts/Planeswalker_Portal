@@ -3,9 +3,14 @@ nav ul li {
   display: inline-block;
   margin-right: .3em;
 }
+@font-face{
+  font-family: 'Magic';
+  src: url('MAGIC.TTF');
+}
 
 h1 {
-  color: chartreuse;
+  color: red;
+  font-family: 'Magic';
 }
 
 .alert-container {
@@ -35,9 +40,18 @@ h1 {
 }
 .hiddenimage{
   width: 25%;
-  display: none
+  padding-left: 50px;
+  position: absolute;
+  visibility: hidden;
+  z-index: 1;
 }
 
-.cardhover:hover .hiddenimage{
-  display: block;
+
+.tooltip-hover:{
+position: relative;
+}
+
+.tooltip-hover:hover .hiddenimage{
+  visibility: visible;
+
 }

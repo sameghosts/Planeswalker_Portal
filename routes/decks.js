@@ -75,6 +75,9 @@ router.get('/edit/:id', isLoggedIn, (req, res) =>{
     }, 
     include: [db.card]
   }).then((deckEdit) => {
+    if (deckEdit.creator !== req.user.id){
+      res.redirect('/');
+    }
     db.deck_cards.findAll({
       where: {
         deckId: deckEdit.id

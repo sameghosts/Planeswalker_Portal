@@ -10,6 +10,7 @@ router.get('/collection', isLoggedIn, (req, res) => {
     where: { id: req.user.id},
     include: [db.card]
   }).then((collection) => {
+    
     db.user_collections.findAll({
       where: {
         userId: req.user.id

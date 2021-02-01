@@ -23,16 +23,17 @@
     <% deck.cards.forEach( (card, index) => { %>
       <% const cardAmount = amount[index].dataValues.amount %>
       <div class="cardhover">
+        <div class="tooltip-hover">
         <a class="cardName"  href="/search/cards/<%= card.multiverseId %>">
           <%=card.name %> 
-  
         </a>
+        <img src="<%= card.imageUrl %>" class="hiddenimage">
+        </div>
           <%= `  ${card.blockset} ` %>
           <%= (amount[index].dataValues.cardId = card.id) ? `    X ${cardAmount}` : '' %>
           <a class="cardDeckDelete" href="./delete/paramDeckId=<%= deck.id %>&paramDeckCard=<%= card.multiverseId %>">
           Delete from Deck
           </a>
-          <img src="<%= card.imageUrl %>" class="hiddenimage">
       </div>
       <% }) %>
   </div>

@@ -21,7 +21,7 @@ app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      "default-src": ["'self'", "*.wizards.com"],
+      "default-src": ["'self'", "*.wizards.com", "*.jsdelivr.net"],
       "img-src": ["'self'", "*.wizards.com"]
 
     }
